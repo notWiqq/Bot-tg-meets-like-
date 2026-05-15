@@ -11,7 +11,7 @@ from aiogram.utils.keyboard import ReplyKeyboardBuilder
 # Настройка логов
 logging.basicConfig(level=logging.INFO)
 
-API_TOKEN ="8"  
+API_TOKEN ="8763448144:AAGP4WLppckSZML8Gxep0qpFmEoZlkzBO0o"  
 
 bot = Bot(token=API_TOKEN)
 dp = Dispatcher()
@@ -80,7 +80,6 @@ async def show_profile(message: types.Message):
     user_info = await get_user(message.from_user.id)
     
     if user_info:
-        # Распаковываем ровно 3 значения, которые вернул SELECT
         nickname, stack, description = user_info
         
         res = (

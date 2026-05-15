@@ -15,7 +15,6 @@ async def save_user(user_id, username, nickname, stack, description):
 
 async def get_user(user_id):
     async with aiosqlite.connect("users_data.db") as db:
-        # Добавляем nickname первым, чтобы было 3 значения
         async with db.execute("SELECT nickname, stack, description FROM users WHERE user_id = ?", (user_id,)) as cursor:
             return await cursor.fetchone()
         
@@ -35,7 +34,7 @@ async def init_db():
                              nickname TEXT, 
                              stack TEXT, 
                              description TEXT)''')
-        # Создаем также таблицу для лайков, чтобы мэтчи работали
+        # Создаем таблицу для лайков, чтобы мэтчи работали
         await db.execute('''CREATE TABLE IF NOT EXISTS likes 
                             (from_user_id INTEGER, 
                              to_user_id INTEGER,
