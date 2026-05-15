@@ -15,8 +15,9 @@ async def save_user(user_id, username, nickname, stack, description):
 
 async def get_user(user_id):
     async with aiosqlite.connect("users_data.db") as db:
-        async with db.execute("SELECT stack, description FROM users WHERE user_id = ?", (user_id,)) as cursor:
-            return await cursor.fetchone() # Возвращает кортеж (stack, description) или None
+        # Добавляем nickname первым, чтобы было 3 значения
+        async with db.execute("SELECT nickname, stack, description FROM users WHERE user_id = ?", (user_id,)) as cursor:
+            return await cursor.fetchone()
         
 async def get_random_user(exclude_user_id):
     async with aiosqlite.connect("users_data.db") as db:
